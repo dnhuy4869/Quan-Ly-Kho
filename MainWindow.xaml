@@ -1,0 +1,558 @@
+﻿<Window
+	x:Class="QuanLyKho.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:uc="clr-namespace:QuanLyKho.UserControls"
+	Name="mainWindow"
+	Title="Stock Management"
+	Width="870"
+	Height="600"
+	Background="{DynamicResource MaterialDesignPaper}"
+	DataContext="{StaticResource MainWindowVM}"
+	FontFamily="{DynamicResource MaterialDesignFont}"
+	ResizeMode="NoResize"
+	TextElement.FontSize="13"
+	TextElement.FontWeight="Regular"
+	TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+	TextOptions.TextFormattingMode="Ideal"
+	TextOptions.TextRenderingMode="Auto"
+	WindowStartupLocation="CenterScreen"
+	WindowStyle="None"
+	mc:Ignorable="d">
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<i:InvokeCommandAction Command="{Binding LoadMainWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	<Border BorderBrush="#673AB7" BorderThickness="1">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0">
+				<uc:ControlBarUC Tag="{Binding Title, ElementName=mainWindow}" />
+			</Grid>
+			<Grid Grid.Row="1" Background="White">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+
+				<!--  Menu  -->
+				<Grid Grid.Row="0">
+					<Grid Background="Transparent">
+						<Grid.Resources>
+							<Style TargetType="Button">
+								<Setter Property="Margin" Value="5,5,5,5" />
+								<Setter Property="Width" Value="140" />
+								<Setter Property="Height" Value="28" />
+								<Setter Property="Background" Value="#673AB7" />
+								<Setter Property="Foreground" Value="WhiteSmoke" />
+
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="{x:Type Button}">
+											<Border
+												Background="{TemplateBinding Background}"
+												BorderBrush="Black"
+												BorderThickness="0">
+												<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+											</Border>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+
+								<Style.Triggers>
+									<Trigger Property="IsMouseOver" Value="True">
+										<Setter Property="Background" Value="BlueViolet" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</Grid.Resources>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Button
+							Name="btnStockin"
+							Grid.Column="0"
+							Width="110"
+							BorderThickness="0"
+							Command="{Binding LoadChildWindowCommand}"
+							CommandParameter="{Binding ElementName=btnStockin}"
+							ToolBar.OverflowMode="AsNeeded"
+							ToolTip="Stock in">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0">
+									<materialDesign:PackIcon
+										Margin="0,0,4,0"
+										HorizontalAlignment="Center"
+										Kind="Import" />
+								</Grid>
+								<Grid Grid.Column="1">
+									<TextBlock
+										Margin="0,1,0,0"
+										HorizontalAlignment="Center"
+										RenderTransformOrigin="0.873,0.444"
+										Text="Stock in" />
+								</Grid>
+							</Grid>
+						</Button>
+						<Button
+							Name="btnStockout"
+							Grid.Column="1"
+							Width="110"
+							BorderThickness="0"
+							Command="{Binding LoadChildWindowCommand}"
+							CommandParameter="{Binding ElementName=btnStockout}"
+							ToolBar.OverflowMode="AsNeeded"
+							ToolTip="Stock out">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0">
+									<materialDesign:PackIcon
+										Margin="0,0,4,0"
+										HorizontalAlignment="Center"
+										Kind="Export" />
+								</Grid>
+								<Grid Grid.Column="1">
+									<TextBlock
+										Margin="0,1,0,0"
+										HorizontalAlignment="Center"
+										RenderTransformOrigin="0.873,0.444"
+										Text="Stock out" />
+								</Grid>
+							</Grid>
+						</Button>
+						<Button
+							Name="btnSupplies"
+							Grid.Column="2"
+							Width="110"
+							BorderThickness="0"
+							Command="{Binding LoadChildWindowCommand}"
+							CommandParameter="{Binding ElementName=btnSupplies}"
+							ToolBar.OverflowMode="AsNeeded"
+							ToolTip="Supplies">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0">
+									<materialDesign:PackIcon
+										Margin="0,0,4,0"
+										HorizontalAlignment="Center"
+										Kind="PackageVariantClosed" />
+								</Grid>
+								<Grid Grid.Column="1">
+									<TextBlock
+										Margin="0,1,0,0"
+										HorizontalAlignment="Center"
+										RenderTransformOrigin="0.873,0.444"
+										Text="Supplies" />
+								</Grid>
+							</Grid>
+						</Button>
+						<Button
+							Name="btnUnit"
+							Grid.Column="3"
+							Width="110"
+							BorderThickness="0"
+							Command="{Binding LoadChildWindowCommand}"
+							CommandParameter="{Binding ElementName=btnUnit}"
+							ToolBar.OverflowMode="AsNeeded"
+							ToolTip="Unit">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0">
+									<materialDesign:PackIcon
+										Margin="0,0,4,0"
+										HorizontalAlignment="Center"
+										Kind="ChartScatterPlotHexbin" />
+								</Grid>
+								<Grid Grid.Column="1">
+									<TextBlock
+										Margin="0,1,0,0"
+										HorizontalAlignment="Center"
+										RenderTransformOrigin="0.873,0.444"
+										Text="Unit" />
+								</Grid>
+							</Grid>
+						</Button>
+						<Button
+							Name="btnSupplier"
+							Grid.Column="4"
+							Width="110"
+							BorderThickness="0"
+							Command="{Binding LoadChildWindowCommand}"
+							CommandParameter="{Binding ElementName=btnSupplier}"
+							ToolBar.OverflowMode="AsNeeded"
+							ToolTip="Supplier">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0">
+									<materialDesign:PackIcon
+										Margin="0,0,4,0"
+										HorizontalAlignment="Center"
+										Kind="Factory" />
+								</Grid>
+								<Grid Grid.Column="1">
+									<TextBlock
+										Margin="0,1,0,0"
+										HorizontalAlignment="Center"
+										RenderTransformOrigin="0.873,0.444"
+										Text="Supplier" />
+								</Grid>
+							</Grid>
+						</Button>
+						<Button
+							Name="btnCustomer"
+							Grid.Column="5"
+							Width="110"
+							BorderThickness="0"
+							Command="{Binding LoadChildWindowCommand}"
+							CommandParameter="{Binding ElementName=btnCustomer}"
+							ToolBar.OverflowMode="AsNeeded"
+							ToolTip="Customer">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0">
+									<materialDesign:PackIcon
+										Margin="0,0,4,0"
+										HorizontalAlignment="Center"
+										Kind="AccountMultiple" />
+								</Grid>
+								<Grid Grid.Column="1">
+									<TextBlock
+										Margin="0,1,0,0"
+										HorizontalAlignment="Center"
+										RenderTransformOrigin="0.873,0.444"
+										Text="Customer" />
+								</Grid>
+							</Grid>
+						</Button>
+						<Button
+							Name="btnUser"
+							Grid.Column="6"
+							Width="110"
+							BorderThickness="0"
+							Command="{Binding LoadChildWindowCommand}"
+							CommandParameter="{Binding ElementName=btnUser}"
+							ToolBar.OverflowMode="AsNeeded"
+							ToolTip="User">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition />
+									<ColumnDefinition />
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0">
+									<materialDesign:PackIcon
+										Margin="0,0,4,0"
+										HorizontalAlignment="Center"
+										Kind="AccountEdit" />
+								</Grid>
+								<Grid Grid.Column="1">
+									<TextBlock
+										Margin="0,1,0,0"
+										HorizontalAlignment="Center"
+										RenderTransformOrigin="0.873,0.444"
+										Text="User" />
+								</Grid>
+							</Grid>
+						</Button>
+					</Grid>
+				</Grid>
+				<Grid Grid.Row="1">
+					<Separator />
+				</Grid>
+				<!--  Main  -->
+				<Grid Grid.Row="2" Background="White">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+
+					<!--  Filter  -->
+					<Grid Grid.Row="0">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Grid Grid.Row="0">
+							<DockPanel Margin="0,0,0,3" HorizontalAlignment="Left">
+								<DatePicker
+									Width="100"
+									Height="40"
+									Margin="10,5,5,5"
+									materialDesign:HintAssist.Hint="From Date"
+									Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+								<DatePicker
+									Width="100"
+									Height="40"
+									Margin="50,5,5,5"
+									materialDesign:HintAssist.Hint="To Date"
+									Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+								<Button
+									Grid.Column="1"
+									Width="100"
+									VerticalContentAlignment="Center"
+									BorderThickness="0"
+									Content="Filter"
+									ToolBar.OverflowMode="AsNeeded"
+									ToolTip="Filter">
+									<Button.Style>
+										<Style TargetType="Button">
+											<Setter Property="Margin" Value="50,15,5,0" />
+											<Setter Property="Width" Value="140" />
+											<Setter Property="Height" Value="28" />
+											<Setter Property="Background" Value="#673AB7" />
+											<Setter Property="Foreground" Value="WhiteSmoke" />
+
+											<Setter Property="Template">
+												<Setter.Value>
+													<ControlTemplate TargetType="{x:Type Button}">
+														<Border
+															Background="{TemplateBinding Background}"
+															BorderBrush="Black"
+															BorderThickness="0">
+															<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+														</Border>
+													</ControlTemplate>
+												</Setter.Value>
+											</Setter>
+
+											<Style.Triggers>
+												<Trigger Property="IsMouseOver" Value="True">
+													<Setter Property="Background" Value="BlueViolet" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</Button.Style>
+								</Button>
+							</DockPanel>
+						</Grid>
+
+						<Grid Grid.Row="1" Margin="0,5,0,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition />
+								<ColumnDefinition />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+							<Grid Grid.Column="0">
+								<materialDesign:Card
+									Width="250"
+									Padding="0"
+									Background="#673AB7"
+									Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+										</Grid.RowDefinitions>
+										<TextBlock Grid.Row="0" Margin="16,16,16,4">
+											Quantity of packages input
+										</TextBlock>
+										<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+										<TextBlock
+											Grid.Row="2"
+											Margin="16,0,16,8"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Center"
+											Style="{StaticResource MaterialDesignBody2TextBlock}">
+											13000
+										</TextBlock>
+										<materialDesign:PopupBox
+											Margin="0,10,0,0"
+											Padding="2,0,2,0"
+											HorizontalAlignment="Right">
+											<StackPanel>
+												<Button Width="150" Content="More" />
+												<Button Width="150" Content="Options" />
+											</StackPanel>
+										</materialDesign:PopupBox>
+									</Grid>
+								</materialDesign:Card>
+							</Grid>
+							<Grid Grid.Column="1">
+								<materialDesign:Card
+									Width="250"
+									Padding="0"
+									Background="#673AB7"
+									Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+										</Grid.RowDefinitions>
+										<TextBlock Grid.Row="0" Margin="16,16,16,4">
+											Quantity of packages output
+										</TextBlock>
+										<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+										<TextBlock
+											Grid.Row="2"
+											Margin="16,0,16,8"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Center"
+											Style="{StaticResource MaterialDesignBody2TextBlock}">
+											29000
+										</TextBlock>
+										<materialDesign:PopupBox
+											Margin="0,10,0,0"
+											Padding="2,0,2,0"
+											HorizontalAlignment="Right">
+											<StackPanel>
+												<Button Width="150" Content="More" />
+												<Button Width="150" Content="Options" />
+											</StackPanel>
+										</materialDesign:PopupBox>
+									</Grid>
+								</materialDesign:Card>
+							</Grid>
+							<Grid Grid.Column="2">
+								<materialDesign:Card
+									Width="250"
+									Padding="0"
+									Background="#673AB7"
+									Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="Auto" />
+										</Grid.RowDefinitions>
+										<TextBlock Grid.Row="0" Margin="16,16,16,4">
+											In stock
+										</TextBlock>
+										<Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+										<TextBlock
+											Grid.Row="2"
+											Margin="16,0,16,8"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Center"
+											Style="{StaticResource MaterialDesignBody2TextBlock}">
+											6000
+										</TextBlock>
+										<materialDesign:PopupBox
+											Margin="0,10,0,0"
+											Padding="2,0,2,0"
+											HorizontalAlignment="Right">
+											<StackPanel>
+												<Button Width="150" Content="More" />
+												<Button Width="150" Content="Options" />
+											</StackPanel>
+										</materialDesign:PopupBox>
+									</Grid>
+								</materialDesign:Card>
+							</Grid>
+						</Grid>
+					</Grid>
+
+					<!--  List  -->
+					<Grid Grid.Row="1">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Grid Grid.Row="0">
+							<DockPanel HorizontalAlignment="Left">
+								<DatePicker
+									Width="100"
+									Height="40"
+									Margin="10,5,5,5"
+									materialDesign:HintAssist.Hint="From Date"
+									Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+								<DatePicker
+									Width="100"
+									Height="40"
+									Margin="50,5,5,5"
+									materialDesign:HintAssist.Hint="To Date"
+									Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+								<Button
+									Grid.Column="1"
+									Width="100"
+									VerticalContentAlignment="Center"
+									BorderThickness="0"
+									Content="Filter"
+									ToolBar.OverflowMode="AsNeeded"
+									ToolTip="Filter">
+									<Button.Style>
+										<Style TargetType="Button">
+											<Setter Property="Margin" Value="50,15,5,0" />
+											<Setter Property="Width" Value="140" />
+											<Setter Property="Height" Value="28" />
+											<Setter Property="Background" Value="#673AB7" />
+											<Setter Property="Foreground" Value="WhiteSmoke" />
+
+											<Setter Property="Template">
+												<Setter.Value>
+													<ControlTemplate TargetType="{x:Type Button}">
+														<Border
+															Background="{TemplateBinding Background}"
+															BorderBrush="Black"
+															BorderThickness="0">
+															<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+														</Border>
+													</ControlTemplate>
+												</Setter.Value>
+											</Setter>
+
+											<Style.Triggers>
+												<Trigger Property="IsMouseOver" Value="True">
+													<Setter Property="Background" Value="BlueViolet" />
+												</Trigger>
+											</Style.Triggers>
+										</Style>
+									</Button.Style>
+								</Button>
+							</DockPanel>
+						</Grid>
+						<Grid Grid.Row="1">
+							<ScrollViewer VerticalScrollBarVisibility="Auto">
+								<ScrollViewer HorizontalScrollBarVisibility="Auto">
+									<ListView VerticalAlignment="Stretch" ItemsSource="{Binding StockInTradeList}">
+										<ListView.View>
+											<GridView>
+												<GridViewColumn DisplayMemberBinding="{Binding STT}" Header="Ordinal number" />
+												<GridViewColumn DisplayMemberBinding="{Binding Object.DisplayName}" Header="Supplies name" />
+												<GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Number of stock in trade" />
+											</GridView>
+										</ListView.View>
+									</ListView>
+								</ScrollViewer>
+							</ScrollViewer>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
+	</Border>
+</Window>

@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:viewModel="clr-namespace:QuanLyKho.ViewModel">
+	<viewModel:MainWindowViewModel x:Key="MainWindowVM" />
+	<viewModel:LoginWindowViewModel x:Key="LoginWindowVM" />
+	<viewModel:NotifyWindowOkViewModel x:Key="NotifyWindowOkVM" />
+	<viewModel:ControlBarChildWindowViewModel x:Key="ControlBarChildWindowVM" />
+	<viewModel:ControlBarViewModel x:Key="ControlBarVM" />
+	<viewModel:UnitWindowViewModel x:Key="UnitWindowVM" />
+	<viewModel:SupplierWindowViewModel x:Key="SupplierWindowVM" />
+	<viewModel:ObjectWindowViewModel x:Key="ObjectWindowVM" />
+</ResourceDictionary>

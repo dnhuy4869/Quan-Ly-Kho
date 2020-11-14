@@ -1,0 +1,222 @@
+﻿<Window
+	x:Class="QuanLyKho.ChildWindows.InputWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:QuanLyKho.ChildWindows"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:uc="clr-namespace:QuanLyKho.UserControls"
+	Name="inputWindow"
+	Title="Stock In"
+	Width="700"
+	Height="450"
+	Background="{DynamicResource MaterialDesignPaper}"
+	FontFamily="{DynamicResource MaterialDesignFont}"
+	ResizeMode="NoResize"
+	TextElement.FontSize="13"
+	TextElement.FontWeight="Regular"
+	TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+	TextOptions.TextFormattingMode="Ideal"
+	TextOptions.TextRenderingMode="Auto"
+	WindowStartupLocation="CenterOwner"
+	WindowStyle="None"
+	mc:Ignorable="d">
+	<Border BorderBrush="#673AB7" BorderThickness="1">
+		<Grid Background="White">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0">
+				<uc:ControlBarChildWindowUC x:Name="controlBar" Tag="{Binding Title, ElementName=inputWindow}" />
+			</Grid>
+
+			<Grid Grid.Row="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+
+				<!--  Element binding from selected and button  -->
+				<Grid Grid.Row="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="200" />
+					</Grid.ColumnDefinitions>
+					<Grid Grid.Column="0" HorizontalAlignment="Left">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Grid Grid.Row="0">
+							<StackPanel Orientation="Horizontal">
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="5,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Name"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+									Text="{Binding ObjectDisplayName, UpdateSourceTrigger=PropertyChanged}" />
+								<DatePicker
+									Width="150"
+									Margin="10,0,0,0"
+									materialDesign:HintAssist.Hint="Input date"
+									SelectedDate="{Binding InputDate, UpdateSourceTrigger=PropertyChanged}"
+									Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="10,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Quantity"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+									Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" />
+							</StackPanel>
+						</Grid>
+						<Grid Grid.Row="1">
+							<StackPanel Orientation="Horizontal">
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="5,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Input price"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+									Text="{Binding InputPrice, UpdateSourceTrigger=PropertyChanged}" />
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="10,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Output price"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+									Text="{Binding OutputPrice, UpdateSourceTrigger=PropertyChanged}" />
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="10,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Status"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+									Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" />
+							</StackPanel>
+						</Grid>
+						<Grid Grid.Row="2">
+							<StackPanel Orientation="Horizontal">
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="5,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Unknow"
+									IsEnabled="False"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="10,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Unknow"
+									IsEnabled="False"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+								<TextBox
+									Width="150"
+									Height="45"
+									Margin="10,0,0,0"
+									VerticalAlignment="Top"
+									materialDesign:HintAssist.Hint="Unknow"
+									IsEnabled="False"
+									Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+							</StackPanel>
+						</Grid>
+					</Grid>
+
+					<Grid
+						Grid.Column="1"
+						Margin="0,21,45,0"
+						HorizontalAlignment="Right">
+						<Grid.Resources>
+							<Style TargetType="Button">
+								<Setter Property="Width" Value="140" />
+								<Setter Property="Height" Value="28" />
+								<Setter Property="Background" Value="#673AB7" />
+								<Setter Property="Foreground" Value="WhiteSmoke" />
+
+								<Setter Property="Template">
+									<Setter.Value>
+										<ControlTemplate TargetType="{x:Type Button}">
+											<Border
+												Background="{TemplateBinding Background}"
+												BorderBrush="Black"
+												BorderThickness="0">
+												<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+											</Border>
+										</ControlTemplate>
+									</Setter.Value>
+								</Setter>
+
+								<Style.Triggers>
+									<Trigger Property="IsMouseOver" Value="True">
+										<Setter Property="Background" Value="BlueViolet" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</Grid.Resources>
+
+						<StackPanel HorizontalAlignment="Right">
+							<Button
+								Width="110"
+								Margin="5,5,5,5"
+								BorderThickness="0"
+								Command="{Binding AddCommand}"
+								Content="Add"
+								ToolBar.OverflowMode="AsNeeded"
+								ToolTip="Add" />
+							<Button
+								Width="110"
+								Margin="5,5,5,5"
+								BorderThickness="0"
+								Command="{Binding DeleteCommand}"
+								Content="Delete"
+								ToolBar.OverflowMode="AsNeeded"
+								ToolTip="Delete" />
+							<Button
+								Width="110"
+								Margin="5,5,5,0"
+								BorderThickness="0"
+								Command="{Binding EditCommand}"
+								Content="Edit"
+								ToolBar.OverflowMode="AsNeeded"
+								ToolTip="Edit" />
+						</StackPanel>
+
+					</Grid>
+				</Grid>
+
+				<!--  List view  -->
+				<Grid Grid.Row="1" VerticalAlignment="Stretch">
+					<ScrollViewer VerticalScrollBarVisibility="Auto">
+						<ScrollViewer HorizontalScrollBarVisibility="Auto">
+							<ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+								<ListView.View>
+									<GridView>
+										<GridViewColumn DisplayMemberBinding="{Binding Object.DisplayName}" Header="Object" />
+										<GridViewColumn DisplayMemberBinding="{Binding Input.InputDate}" Header="Input date" />
+										<GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Quantity" />
+										<GridViewColumn DisplayMemberBinding="{Binding InputPrice}" Header="Input price" />
+										<GridViewColumn DisplayMemberBinding="{Binding InputInfo.OutputPrice}" Header="Output price" />
+										<GridViewColumn DisplayMemberBinding="{Binding Status}" Header="Status" />
+									</GridView>
+								</ListView.View>
+							</ListView>
+						</ScrollViewer>
+					</ScrollViewer>
+				</Grid>
+			</Grid>
+		</Grid>
+	</Border>
+
+</Window>

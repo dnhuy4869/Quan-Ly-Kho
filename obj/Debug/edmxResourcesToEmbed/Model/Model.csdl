@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLyKhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="QuanLyKhoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="QuanLyKhoModel.Customer" />
+    <EntitySet Name="Inputs" EntityType="QuanLyKhoModel.Input" />
+    <EntitySet Name="InputInfoes" EntityType="QuanLyKhoModel.InputInfo" />
+    <EntitySet Name="Objects" EntityType="QuanLyKhoModel.Object" />
+    <EntitySet Name="Outputs" EntityType="QuanLyKhoModel.Output" />
+    <EntitySet Name="OutputInfoes" EntityType="QuanLyKhoModel.OutputInfo" />
+    <EntitySet Name="Suppliers" EntityType="QuanLyKhoModel.Supplier" />
+    <EntitySet Name="Units" EntityType="QuanLyKhoModel.Unit" />
+    <EntitySet Name="UserRoles" EntityType="QuanLyKhoModel.UserRole" />
+    <EntitySet Name="Users" EntityType="QuanLyKhoModel.User" />
+    <AssociationSet Name="FK__OutputInf__IdCus__3B75D760" Association="QuanLyKhoModel.FK__OutputInf__IdCus__3B75D760">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="OutputInfo" EntitySet="OutputInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__IdInp__37A5467C" Association="QuanLyKhoModel.FK__InputInfo__IdInp__37A5467C">
+      <End Role="Input" EntitySet="Inputs" />
+      <End Role="InputInfo" EntitySet="InputInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InputInfo__IdObj__38996AB5" Association="QuanLyKhoModel.FK__InputInfo__IdObj__38996AB5">
+      <End Role="Object" EntitySet="Objects" />
+      <End Role="InputInfo" EntitySet="InputInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Object__IdSuppli__398D8EEE" Association="QuanLyKhoModel.FK__Object__IdSuppli__398D8EEE">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Object" EntitySet="Objects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Object__IdUnit__3A81B327" Association="QuanLyKhoModel.FK__Object__IdUnit__3A81B327">
+      <End Role="Unit" EntitySet="Units" />
+      <End Role="Object" EntitySet="Objects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInf__IdObj__3C69FB99" Association="QuanLyKhoModel.FK__OutputInf__IdObj__3C69FB99">
+      <End Role="Object" EntitySet="Objects" />
+      <End Role="OutputInfo" EntitySet="OutputInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutputInfo__Id__3D5E1FD2" Association="QuanLyKhoModel.FK__OutputInfo__Id__3D5E1FD2">
+      <End Role="Output" EntitySet="Outputs" />
+      <End Role="OutputInfo" EntitySet="OutputInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__IdRole__3E52440B" Association="QuanLyKhoModel.FK__Users__IdRole__3E52440B">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContractDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="OutputInfoes" Relationship="QuanLyKhoModel.FK__OutputInf__IdCus__3B75D760" FromRole="Customer" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="Input">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateInput" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="InputInfoes" Relationship="QuanLyKhoModel.FK__InputInfo__IdInp__37A5467C" FromRole="Input" ToRole="InputInfo" />
+  </EntityType>
+  <EntityType Name="InputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdObject" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdInput" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="InputPrice" Type="Double" />
+    <Property Name="OutputPirce" Type="Double" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Input" Relationship="QuanLyKhoModel.FK__InputInfo__IdInp__37A5467C" FromRole="InputInfo" ToRole="Input" />
+    <NavigationProperty Name="Object" Relationship="QuanLyKhoModel.FK__InputInfo__IdObj__38996AB5" FromRole="InputInfo" ToRole="Object" />
+  </EntityType>
+  <EntityType Name="Object">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdUnit" Type="Int32" Nullable="false" />
+    <Property Name="IdSupplier" Type="Int32" Nullable="false" />
+    <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InputInfoes" Relationship="QuanLyKhoModel.FK__InputInfo__IdObj__38996AB5" FromRole="Object" ToRole="InputInfo" />
+    <NavigationProperty Name="Supplier" Relationship="QuanLyKhoModel.FK__Object__IdSuppli__398D8EEE" FromRole="Object" ToRole="Supplier" />
+    <NavigationProperty Name="Unit" Relationship="QuanLyKhoModel.FK__Object__IdUnit__3A81B327" FromRole="Object" ToRole="Unit" />
+    <NavigationProperty Name="OutputInfoes" Relationship="QuanLyKhoModel.FK__OutputInf__IdObj__3C69FB99" FromRole="Object" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="Output">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateOutput" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="OutputInfo" Relationship="QuanLyKhoModel.FK__OutputInfo__Id__3D5E1FD2" FromRole="Output" ToRole="OutputInfo" />
+  </EntityType>
+  <EntityType Name="OutputInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdObject" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdOutputInfo" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="QuanLyKhoModel.FK__OutputInf__IdCus__3B75D760" FromRole="OutputInfo" ToRole="Customer" />
+    <NavigationProperty Name="Object" Relationship="QuanLyKhoModel.FK__OutputInf__IdObj__3C69FB99" FromRole="OutputInfo" ToRole="Object" />
+    <NavigationProperty Name="Output" Relationship="QuanLyKhoModel.FK__OutputInfo__Id__3D5E1FD2" FromRole="OutputInfo" ToRole="Output" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContractDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Objects" Relationship="QuanLyKhoModel.FK__Object__IdSuppli__398D8EEE" FromRole="Supplier" ToRole="Object" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Objects" Relationship="QuanLyKhoModel.FK__Object__IdUnit__3A81B327" FromRole="Unit" ToRole="Object" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="QuanLyKhoModel.FK__Users__IdRole__3E52440B" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdRole" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserRole" Relationship="QuanLyKhoModel.FK__Users__IdRole__3E52440B" FromRole="User" ToRole="UserRole" />
+  </EntityType>
+  <Association Name="FK__OutputInf__IdCus__3B75D760">
+    <End Type="QuanLyKhoModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.OutputInfo" Role="OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__IdInp__37A5467C">
+    <End Type="QuanLyKhoModel.Input" Role="Input" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.InputInfo" Role="InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Input">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdInput" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InputInfo__IdObj__38996AB5">
+    <End Type="QuanLyKhoModel.Object" Role="Object" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.InputInfo" Role="InputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InputInfo">
+        <PropertyRef Name="IdObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Object__IdSuppli__398D8EEE">
+    <End Type="QuanLyKhoModel.Supplier" Role="Supplier" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.Object" Role="Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="IdSupplier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Object__IdUnit__3A81B327">
+    <End Type="QuanLyKhoModel.Unit" Role="Unit" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.Object" Role="Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="IdUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInf__IdObj__3C69FB99">
+    <End Type="QuanLyKhoModel.Object" Role="Object" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.OutputInfo" Role="OutputInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="IdObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutputInfo__Id__3D5E1FD2">
+    <End Type="QuanLyKhoModel.Output" Role="Output" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.OutputInfo" Role="OutputInfo" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Output">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OutputInfo">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__IdRole__3E52440B">
+    <End Type="QuanLyKhoModel.UserRole" Role="UserRole" Multiplicity="1" />
+    <End Type="QuanLyKhoModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
